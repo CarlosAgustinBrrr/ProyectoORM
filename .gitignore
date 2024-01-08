@@ -4,3 +4,4 @@ __pycache__/
 
 # Ignorar el directorio virtual (entorno virtual)
 venv/
+venv/Lib/site-packages/django/contrib/admin/migrations/__pycache__/0003_logentry_add_action_flag_choices.cpython-312.pyc
