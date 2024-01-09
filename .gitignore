@@ -1,0 +1,16 @@
+# Ignorar archivos generados por Python
+*.pyc
+__pycache__/
+
+# Ignorar el directorio virtual (entorno virtual)
+venv/
+venv/Lib/site-packages/django/contrib/admin/migrations/__pycache__/0003_logentry_add_action_flag_choices.cpython-312.pyc
+venv/Lib/site-packages/django/contrib/admin/migrations/__pycache__/0003_logentry_add_action_flag_choices.cpython-312.pyc
+venv/Lib/site-packages/django/contrib/auth/migrations/__pycache__/0002_alter_permission_name_max_length.cpython-312.pyc
+venv/Lib/site-packages/django/contrib/auth/migrations/__pycache__/0007_alter_validators_add_error_messages.cpython-312.pyc
+venv/Lib/site-packages/django/contrib/auth/migrations/__pycache__/0008_alter_user_username_max_length.cpython-312.pyc
+venv/Lib/site-packages/django/contrib/auth/migrations/__pycache__/0012_alter_user_first_name_max_length.cpython-312.pyc
+venv/Lib/site-packages/django/contrib/auth/migrations/__pycache__/0009_alter_user_last_name_max_length.cpython-312.pyc
+venv/Lib/site-packages/django/contrib/contenttypes/migrations/__pycache__/0002_remove_content_type_name.cpython-312.pyc
+venv/Lib/site-packages/django/contrib/contenttypes/management/commands/__pycache__/remove_stale_contenttypes.cpython-312.pyc
+venv/Lib/site-packages/django/contrib/redirects/migrations/__pycache__/0002_alter_redirect_new_path_help_text.cpython-312.pyc
