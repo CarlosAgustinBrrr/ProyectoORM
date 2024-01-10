@@ -3,8 +3,10 @@ from .models import Marca
 from .models import Vehiculo
 from .models import Modelo
 
+def consultar_vehiculos(request):
+    vehiculos = Vehiculo.objects.select_related('idmarca', 'idmodelo').all()
 
-# Create your views here.
+    for vehiculo in vehiculos:
+        print(f"ID: {vehiculo.idVehiculo}, Color: {vehiculo.color}, Marca: {vehiculo.idmarca.nombre}, Modelo: {vehiculo.idmodelo.nombre_modelo}, Puertas: {vehiculo.idmodelo.numero_puertas}, Motor: {vehiculo.idmodelo.tipo_motor}, Precio: {vehiculo.precio}")
 
-def index(request):
-    return render(request, "index.html")
+    return render(request, 'index.html', {'vehiculos': vehiculos})
