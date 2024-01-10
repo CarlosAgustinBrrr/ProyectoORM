@@ -1,5 +1,8 @@
 from django.shortcuts import render
-from .models import Coche  # Importa tu modelo Coche
+from .models import Marca
+from .models import Vehiculo
+from .models import Modelo
+
 
 # Create your views here.
 
