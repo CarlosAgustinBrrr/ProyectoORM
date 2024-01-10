@@ -48,35 +48,40 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr class="table-expandable" data-toggle="collapse" data-target="#row1">
-                                    <td>XXXXX</td>
-                                    <td>Marca1</td>
-                                    <td>Modelo1</td>
-                                    <td>Tipo1</td>
-                                    <td class="text-center"><button type="button" class="btn btn-info btn-sm">&#10034;</button><button type="button" class="btn btn-danger ml-2 btn-sm">&#10006;</button></td>
-                                </tr>
-                                <tr id="row1" class="collapse">
-                                    <td colspan="5">
-                                        <table class="table table-striped nested-table">
-                                            <thead>
-                                                <tr>
-                                                    <th>NºPuertas</th>
-                                                    <th>Motor</th>
-                                                    <th>Color</th>
-                                                    <th>Precio</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td>Dato1</td>
-                                                    <td>Dato2</td>
-                                                    <td>Dato2</td>
-                                                    <td>Dato2</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </td>
-                                </tr>
+                                {% for vehiculo in vehiculos %}
+                                    <tr class="table-expandable" data-toggle="collapse" data-target="#row{{ vehiculo.idVehiculo }}">
+                                        <td>{{ vehiculo.idVehiculo }}</td>
+                                        <td>{{ vehiculo.idmarca.nombre }}</td>
+                                        <td>{{ vehiculo.idmodelo.nombre_modelo }}</td>
+                                        <td>{{ vehiculo.idmodelo.tipo_motor }}</td>
+                                        <td class="text-center">
+                                            <button type="button" class="btn btn-info btn-sm">&#10034;</button>
+                                            <button type="button" class="btn btn-danger ml-2 btn-sm">&#10006;</button>
+                                        </td>
+                                    </tr>
+                                    <tr id="row{{ vehiculo.idVehiculo }}" class="collapse">
+                                        <td colspan="5">
+                                            <table class="table table-striped nested-table">
+                                                <thead>
+                                                    <tr>
+                                                        <th>NºPuertas</th>
+                                                        <th>Motor</th>
+                                                        <th>Color</th>
+                                                        <th>Precio</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>{{ vehiculo.idmodelo.numero_puertas }}</td>
+                                                        <td>{{ vehiculo.idmodelo.tipo_motor }}</td>
+                                                        <td>{{ vehiculo.color }}</td>
+                                                        <td>{{ vehiculo.precio }}</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
                             </tbody>
                         </table>
                     </div>
