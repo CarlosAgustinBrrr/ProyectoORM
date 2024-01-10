@@ -3,15 +3,10 @@
 <head>
     <title>User Management</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-    <style>
-        body {
-            background-color: #f8f9fa; 
-       }
-    </style>
 </head>
-<body>
+<body class="bg-secondary">
     <nav th:fragment="navbar" class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="#">☆ ☆ ☆ Supernova Club ☆ ☆ ☆</a>
+        <a class="navbar-brand" href="#">🚗✞Concesionarios Salesianos✞🚗</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav"
                 aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -19,82 +14,83 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">Usuarios<span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">No</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">puedo</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">mas</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">con</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Spring Boot</a>
+                    <a class="nav-link" href="#">Añadir vehiculo a catalogo<span class="sr-only">(current)</span></a>
                 </li>
             </ul>
         </div>
     </nav>
-<div class="container">
-    <div class="card shadow mt-4">
-        <div class="card-body">
-            <div>
-                <h2>CONCESIONARIO</h2>
-                <div>
-                    <div class="card shadow">
-                        <div class="card-body">
-                            <table class="table">
-                                <form action="/acortar" method="POST" class="form-inline">
-                                    <div class="input-group">
-                                        <input type="url" class="form-control" id="urlInput" name="origUrl" placeholder="Ingrese la URL">
-                                        <div class="input-group-append">
-                                            <select class="custom-select">
-                                                <option value="opcion1">Opción 1</option>
-                                                <option value="opcion2">Opción 2</option>
-                                            </select>
-                                            <button type="submit" class="btn btn-primary">Acortar URL</button>
-                                        </div>
-                                    </div>
-                                </form>
-                                <thead>
-                                    <tr>
-                                        <th>NºBastidor</th>
-                                        <th>Marca</th>
-                                        <th>Modelo</th>
-                                        <th>Tipo</th>
-                                        <th></th>
-                                        <th></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td></td>
-                                        <td></td>
-                                        <td>&#10004;</span></td>
-                                        <td th:text="${user.nombreCompleto}"></td>
-                                        <td><button type="button" class="btn btn-primary">Actualizar</button></td>
-                                        <td><button type="button" class="btn btn-primary">Eliminar</button></td>
-                                    </tr>
-                                </tbody>
-                            </table>
+    <div class="container">
+        <div class="card shadow mt-4">
+            <div class="card-body">
+                <h2 class="mb-4">Catalogo📖</h2>
+                <form action="/acortar" method="POST" class="form-inline mb-4">
+                    <div class="input-group w-100">
+                        <input type="url" class="form-control" id="urlInput" name="origUrl" placeholder="Escriba el vehiculo a buscar...">
+                        <div class="input-group-append">
+                            <select class="custom-select">
+                                <option value="opcion1">Opción 1</option>
+                                <option value="opcion2">Opción 2</option>
+                            </select>
+                            <button type="submit" class="btn btn-primary">Buscar</button>
                         </div>
-                    </div>     
-                <button type="button" class="btn btn-primary mt-2">Insertar</button>
+                    </div>
+                </form>
+                <div class="card shadow">
+                    <div class="card-body">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>NºBastidor</th>
+                                    <th>Marca</th>
+                                    <th>Modelo</th>
+                                    <th>Tipo</th>
+                                    <th class="text-center">Actualizar/Eliminar</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="table-expandable" data-toggle="collapse" data-target="#row1">
+                                    <td>XXXXX</td>
+                                    <td>Marca1</td>
+                                    <td>Modelo1</td>
+                                    <td>Tipo1</td>
+                                    <td class="text-center"><button type="button" class="btn btn-info btn-sm">&#10034;</button><button type="button" class="btn btn-danger ml-2 btn-sm">&#10006;</button></td>
+                                </tr>
+                                <tr id="row1" class="collapse">
+                                    <td colspan="5">
+                                        <table class="table table-striped nested-table">
+                                            <thead>
+                                                <tr>
+                                                    <th>NºPuertas</th>
+                                                    <th>Motor</th>
+                                                    <th>Color</th>
+                                                    <th>Precio</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>Dato1</td>
+                                                    <td>Dato2</td>
+                                                    <td>Dato2</td>
+                                                    <td>Dato2</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-</div>
-<footer class="footer fixed-bottom bg-dark text-light py-2">
-    <div class="container text-center">
-        <span>Supernova Club Copyright © 2023</span>
-    </div>
-</footer>
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <footer class="footer fixed-bottom bg-dark text-white py-2">
+        <div class="container text-center">
+            <span>🚗✞Concesionarios Salesianos✞🚗 | Todos los derechos reservados © 2024</span>
+        </div>
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 </body>
 </html>
