@@ -1,7 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Marca
-from .models import Vehiculo
-from .models import Modelo
+from .models import Marca, Modelo, Vehiculo
 from .forms import VehiculoForm
 
 def consultar_vehiculos(request):
