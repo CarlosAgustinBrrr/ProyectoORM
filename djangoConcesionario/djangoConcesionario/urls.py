@@ -21,6 +21,6 @@ from concesionario.views import crearVehiculo
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', consultar_vehiculos, name='consultar_vehiculos'),
+    path('consultarCatalogo', consultar_vehiculos, name='consultar_vehiculos'),
     path('crearVehiculo', crearVehiculo, name='crearVehiculo'),
 ]
