@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from .models import Marca
 from .models import Vehiculo
 from .models import Modelo
@@ -17,7 +17,7 @@ def crearVehiculo(request):
         vehiculo_form = VehiculoForm(request.POST)
         if vehiculo_form.is_valid():
             vehiculo_form.save()
-            return render(request, "index.html")
+            return redirect(consultar_vehiculos)
     else:
         vehiculo_form = VehiculoForm()
     return render(request, "crearVehiculo.html", {'vehiculo_form':vehiculo_form})
