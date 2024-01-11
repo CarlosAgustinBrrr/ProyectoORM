@@ -1,15 +1,44 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Crear Vehículo</title>
-</head> 
-<body>
-    <h2>Crear Vehículo</h2>
-    <form method="post">
-        {% csrf_token %}
-        {{ vehiculo_form.as_p }}
-        <button type="submit">Guardar</button>
-    </form>
-</body>
-</html>
+    <!DOCTYPE html>
+    <html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <title>Crear Vehículo</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    </head> 
+    <body class="bg-secondary d-flex flex-column min-vh-100">
+        <nav th:fragment="navbar" class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <a class="navbar-brand" href="#">🚗✞Concesionarios Salesianos✞🚗</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/crearVehiculo">Añadir vehiculo a catalogo<span class="sr-only">(current)</span></a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <div class="container d-flex align-items-center justify-content-center flex-grow-1">
+            <div class="card shadow mt-4">
+                <div class="card-body">
+                    <h2 class="mb-4">Crear Vehículo</h2>
+                    <form method="post" class="form-inline mb-4">
+                        {% csrf_token %}
+                        {{ vehiculo_form.as_p }}
+                    </form>
+                    <button type="submit" class="btn btn-primary w-100">Guardar</button>
+                </div>
+            </div>
+        </div>
+        <footer class="footer fixed-bottom bg-dark text-white py-2">
+            <div class="container text-center">
+                <span>🚗✞Concesionarios Salesianos✞🚗 | Todos los derechos reservados © 2024</span>
+            </div>
+        </footer>
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    </body>
+    </html>
