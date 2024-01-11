@@ -1,11 +1,16 @@
 from django.shortcuts import render
-from .models import Marca, Modelo, Vehiculo
+from .models import Marca
+from .models import Vehiculo
+from .models import Modelo
 from .forms import VehiculoForm
 
-# Create your views here.
+def consultar_vehiculos(request):
+    vehiculos = Vehiculo.objects.select_related('idmarca', 'idmodelo').all()
 
-def index(request):
-    return render(request, "index.html")
+    for vehiculo in vehiculos:
+        print(f"ID: {vehiculo.idVehiculo}, Color: {vehiculo.color}, Marca: {vehiculo.idmarca.nombre}, Modelo: {vehiculo.idmodelo.nombre_modelo}, Puertas: {vehiculo.idmodelo.numero_puertas}, Motor: {vehiculo.idmodelo.tipo_motor}, Precio: {vehiculo.precio}")
+
+    return render(request, 'index.html', {'vehiculos': vehiculos})
 
 def crearVehiculo(request):
     if request.method == 'POST':
