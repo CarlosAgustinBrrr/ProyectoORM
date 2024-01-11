@@ -15,7 +15,7 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="/crear_vehiculo">Añadir vehiculo a catalogo<span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="/crear_vehiculo">Añadir vehículo a catálogo<span class="sr-only">(current)</span></a>
                 </li>
             </ul>
             <ul class="navbar-nav">
@@ -33,15 +33,11 @@
         <div class="card shadow mt-4">
             <div class="card-body">
                 <h2 class="mb-4">Catálogo📖</h2>
-                <form action="/acortar" method="POST" class="form-inline mb-4">
+                <form action="/buscarPorNombre" method="POST" class="form-inline mb-4">
+                    {% csrf_token %}
                     <div class="input-group w-100">
-                        <input type="url" class="form-control" id="urlInput" name="origUrl" placeholder="Escriba el vehiculo a buscar...">
+                        <input type="text" class="form-control" id="busqueda" name="busqueda" placeholder="Busque por cualquier caracterísitica del vehículo...">
                         <div class="input-group-append">
-                            <select class="custom-select">
-                                <option value="opcion1">Marca</option>
-                                <option value="opcion2">Tipo</option>
-                                <option value="opcion2">Modelo</option>
-                            </select>
                             <button type="submit" class="btn btn-primary">Buscar</button>
                         </div>
                     </div>
@@ -61,6 +57,19 @@
                             <tbody>
                                 {% for vehiculo in vehiculos %}
                                     <tr class="table-expandable" data-toggle="collapse" data-target="#row{{ vehiculo.idVehiculo }}">
+                                        <form action="/eliminar_vehiculo/{{ vehiculo.idVehiculo }}" id="formEliminar" method="POST">
+                                            {% csrf_token %}
+                                            <td>{{ vehiculo.idVehiculo }}</td>
+                                            <td>{{ vehiculo.idmarca.nombre }}</td>
+                                            <td>{{ vehiculo.idmodelo.nombre_modelo }}</td>
+                                            <td>{{ vehiculo.idmodelo.tipo_motor }}</td>
+                                            <td class="text-center">
+                                                <button type="button" class="btn btn-info btn-sm">&#10034;</button>
+                                                <button type="button" class="btn btn-danger ml-2 btn-sm btn-eliminar" data-id="{{ vehiculo.idVehiculo }}">&#10006;</button>
+                                            </td>
+                                        </form>
+                                    </tr>
+                                    <!-- <tr class="table-expandable" data-toggle="collapse" data-target="#row{{ vehiculo.idVehiculo }}">
                                         <td>{{ vehiculo.idVehiculo }}</td>
                                         <td>{{ vehiculo.idmarca.nombre }}</td>
                                         <td>{{ vehiculo.idmodelo.nombre_modelo }}</td>
@@ -69,7 +78,7 @@
                                             <button type="button" class="btn btn-info btn-sm">&#10034;</button>
                                             <button type="button" class="btn btn-danger ml-2 btn-sm">&#10006;</button>
                                         </td>
-                                    </tr>
+                                    </tr> -->
                                     <tr id="row{{ vehiculo.idVehiculo }}" class="collapse">
                                         <td colspan="5">
                                             <table class="table table-striped nested-table">
@@ -108,5 +117,22 @@
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            document.querySelectorAll('.btn-eliminar').forEach(function(button) {
+                button.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    var form = document.querySelector("#formEliminar");
+                    if (confirm('¿Está seguro de que desea eliminar el vehículo?')) {
+                        form.submit(); // Enviar el formulario
+                    }
+                });
+            });
+        });
+    </script>
+    
+    
+
 </body>
 </html>
