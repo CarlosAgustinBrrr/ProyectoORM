@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>User Management</title>
+    <title>Concesionario</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
 </head>
@@ -15,7 +15,7 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="/crear_vehiculo">Añadir vehículo a catálogo<span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="/crear_vehiculo">Añadir vehículo al catálogo<span class="sr-only">(current)</span></a>
                 </li>
             </ul>
             <ul class="navbar-nav">
@@ -64,8 +64,8 @@
                                             <td>{{ vehiculo.idmodelo.nombre_modelo }}</td>
                                             <td>{{ vehiculo.idmodelo.tipo_motor }}</td>
                                             <td class="text-center">
-                                                <button type="button" class="btn btn-info btn-sm">&#10034;</button>
-                                                <button type="button" class="btn btn-danger ml-2 btn-sm btn-eliminar" data-id="{{ vehiculo.idVehiculo }}">&#10006;</button>
+                                                <button type="button" class="btn btn-primary ml-2 btn-sm" onclick="location.href='/editar_vehiculo/{{ vehiculo.idVehiculo }}'"><i class="fas fa-pencil-alt"></i></button>
+                                                <button type="button" class="btn btn-danger ml-2 btn-sm btn-eliminar" data-id="{{ vehiculo.idVehiculo }}"><i class="fas fa-trash-alt"></i></button>
                                             </td>
                                         </form>
                                     </tr>

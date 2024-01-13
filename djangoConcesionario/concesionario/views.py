@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import Marca, Modelo, Vehiculo
-from .forms import VehiculoForm
+from .forms import CrearVehiculoForm, EditarVehiculoForm
 from django.db.models import Q
 
 def consultar_vehiculos(request):
@@ -13,12 +13,12 @@ def consultar_vehiculos(request):
 
 def crear_vehiculo(request):
     if request.method == 'POST':
-        vehiculo_form = VehiculoForm(request.POST)
+        vehiculo_form = CrearVehiculoForm(request.POST)
         if vehiculo_form.is_valid():
             vehiculo_form.save()
             return redirect('consultar_vehiculos')
     else:
-        vehiculo_form = VehiculoForm()
+        vehiculo_form = CrearVehiculoForm()
     return render(request, "crearVehiculo.html", {'vehiculo_form':vehiculo_form})
 
 def buscar_por_nombre(request):
@@ -48,3 +48,14 @@ def eliminar_vehiculo(request, idVehiculo):
 
     vehiculos = Vehiculo.objects.all()
     return render(request, 'index.html', {'vehiculos': vehiculos})
+
+def editar_vehiculo(request, idVehiculo):
+    vehiculo = Vehiculo.objects.get(idVehiculo=idVehiculo)
+    if request.method == 'POST':
+        edit_form = EditarVehiculoForm(request.POST, instance=vehiculo)
+        if edit_form.is_valid():
+            edit_form.save()
+            return redirect('consultar_vehiculos')
+    else:
+        edit_form = EditarVehiculoForm(instance=vehiculo)
+    return render(request, 'editarVehiculo.html', {'edit_form': edit_form})
