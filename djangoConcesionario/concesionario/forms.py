@@ -4,7 +4,7 @@ from django.core.validators import MinValueValidator
 
 class CrearVehiculoForm(forms.ModelForm):
     precio = forms.FloatField(
-        validators=[MinValueValidator(0, message='El precio debe ser mayor que 0')],
+        validators=[MinValueValidator(1, message='El precio debe ser mayor que 0')],
         widget=forms.NumberInput(attrs={'class': 'form-control'}),
     )
 
@@ -26,7 +26,7 @@ class CrearVehiculoForm(forms.ModelForm):
         
 class EditarVehiculoForm(forms.ModelForm):
     precio = forms.FloatField(
-        validators=[MinValueValidator(0, message='El precio debe ser mayor que 0')],
+        validators=[MinValueValidator(1, message='El precio debe ser mayor que 0')],
         widget=forms.NumberInput(attrs={'class': 'form-control'}),
     )
     class Meta:
