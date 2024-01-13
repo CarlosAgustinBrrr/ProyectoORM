@@ -45,9 +45,7 @@ def buscar_por_nombre(request):
 def eliminar_vehiculo(request, idVehiculo):
     vehiculo = Vehiculo.objects.get(idVehiculo=idVehiculo)
     vehiculo.delete()
-
-    vehiculos = Vehiculo.objects.all()
-    return render(request, 'index.html', {'vehiculos': vehiculos})
+    return redirect('consultar_vehiculos')
 
 def editar_vehiculo(request, idVehiculo):
     vehiculo = Vehiculo.objects.get(idVehiculo=idVehiculo)

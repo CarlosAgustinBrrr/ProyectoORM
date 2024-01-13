@@ -56,19 +56,18 @@
                             </thead>
                             <tbody>
                                 {% for vehiculo in vehiculos %}
-                                    <tr class="table-expandable" data-toggle="collapse" data-target="#row{{ vehiculo.idVehiculo }}">
-                                        <form action="/eliminar_vehiculo/{{ vehiculo.idVehiculo }}" id="formEliminar" method="POST">
-                                            {% csrf_token %}
-                                            <td>{{ vehiculo.idVehiculo }}</td>
-                                            <td>{{ vehiculo.idmarca.nombre }}</td>
-                                            <td>{{ vehiculo.idmodelo.nombre_modelo }}</td>
-                                            <td>{{ vehiculo.idmodelo.tipo_motor }}</td>
-                                            <td class="text-center">
-                                                <button type="button" class="btn btn-primary ml-2 btn-sm" onclick="location.href='/editar_vehiculo/{{ vehiculo.idVehiculo }}'"><i class="fas fa-pencil-alt"></i></button>
-                                                <button type="button" class="btn btn-danger ml-2 btn-sm btn-eliminar" data-id="{{ vehiculo.idVehiculo }}"><i class="fas fa-trash-alt"></i></button>
-                                            </td>
-                                        </form>
-                                    </tr>
+                                <tr class="table-expandable" data-toggle="collapse" data-target="#row{{ vehiculo.idVehiculo }}">
+                                    <form action="/eliminar_vehiculo/{{ vehiculo.idVehiculo }}" id="formEliminar{{ vehiculo.idVehiculo }}" method="POST">
+                                        {% csrf_token %}
+                                        <td>{{ vehiculo.idVehiculo }}</td>
+                                        <td>{{ vehiculo.idmarca.nombre }}</td>
+                                        <td>{{ vehiculo.idmodelo.nombre_modelo }}</td>
+                                        <td>{{ vehiculo.idmodelo.tipo_motor }}</td>
+                                        <td class="text-center">
+                                            <button type="button" class="btn btn-primary ml-2 btn-sm" onclick="location.href='/editar_vehiculo/{{ vehiculo.idVehiculo }}'"><i class="fas fa-pencil-alt"></i></button>
+                                            <button type="submit" class="btn btn-danger ml-2 btn-sm"><i class="fas fa-trash-alt"></i></button>
+                                        </td>
+                                    </form>
                                     <!-- <tr class="table-expandable" data-toggle="collapse" data-target="#row{{ vehiculo.idVehiculo }}">
                                         <td>{{ vehiculo.idVehiculo }}</td>
                                         <td>{{ vehiculo.idmarca.nombre }}</td>

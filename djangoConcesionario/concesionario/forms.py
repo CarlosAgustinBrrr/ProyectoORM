@@ -1,7 +1,13 @@
 from django import forms
 from .models import Marca, Modelo, Vehiculo
+from django.core.validators import MinValueValidator
 
 class CrearVehiculoForm(forms.ModelForm):
+    precio = forms.FloatField(
+        validators=[MinValueValidator(0, message='El precio debe ser mayor que 0')],
+        widget=forms.NumberInput(attrs={'class': 'form-control'}),
+    )
+
     class Meta:
         model = Vehiculo
         fields = ['idmarca', 'idmodelo', 'color', 'precio']
@@ -12,13 +18,17 @@ class CrearVehiculoForm(forms.ModelForm):
             'precio': 'Precio',
         }
         widgets = {
-            'idmarca': forms.Select(attrs={'class':'form-control'}),
-            'idmodelo': forms.Select(attrs={'class':'form-control'}),
-            'color': forms.TextInput(attrs={'class':'form-control'}),
-            'precio': forms.NumberInput(attrs={'class':'form-control'}),
+            'idmarca': forms.Select(attrs={'class': 'form-control'}),
+            'idmodelo': forms.Select(attrs={'class': 'form-control'}),
+            'color': forms.TextInput(attrs={'class': 'form-control'}),
+            'precio': forms.NumberInput(attrs={'class': 'form-control'}),
         }
         
 class EditarVehiculoForm(forms.ModelForm):
+    precio = forms.FloatField(
+        validators=[MinValueValidator(0, message='El precio debe ser mayor que 0')],
+        widget=forms.NumberInput(attrs={'class': 'form-control'}),
+    )
     class Meta:
         model = Vehiculo
         fields = ['idmarca', 'idmodelo', 'color', 'precio']
