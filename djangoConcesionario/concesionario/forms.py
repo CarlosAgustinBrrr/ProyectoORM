@@ -29,8 +29,13 @@ class EditarVehiculoForm(forms.ModelForm):
             'precio': 'Precio',
         }
         widgets = {
-            'idmarca': forms.Select(attrs={'class':'form-control', 'disabled':True}),
-            'idmodelo': forms.Select(attrs={'class':'form-control', 'disabled':True}),
+            'idmarca': forms.Select(attrs={'class':'form-control', 'disabled': True}),
+            'idmodelo': forms.Select(attrs={'class':'form-control', 'disabled': True}),
             'color': forms.TextInput(attrs={'class':'form-control'}),
             'precio': forms.NumberInput(attrs={'class':'form-control'}),
         }
+
+    def __init__(self, *args, **kwargs):
+        super(EditarVehiculoForm, self).__init__(*args, **kwargs)
+        self.fields['idmarca'].disabled = True
+        self.fields['idmodelo'].disabled = True
