@@ -28,25 +28,32 @@
             </ul>
         </div>
     </nav>  
-        <div class="container d-flex align-items-center justify-content-center flex-grow-1">
-            <div class="card shadow mt-4">
-                <div class="card-body">
-                    <h2 class="mb-4">Editando Vehículo</h2>
-                    <form method="post" class="form-inline mb-4">
-                        {% csrf_token %}
-                        {{ edit_form.as_p }}
-                        <button type="submit" class="btn btn-primary w-100">Guardar</button>
-                    </form>
-                </div>
+    <div class="container d-flex align-items-center justify-content-center flex-grow-1">
+        <div class="card shadow mt-4">
+            <div class="card-body">
+                <h2 class="mb-4">Editando Vehículo</h2>
+                <form id="editForm" method="post" class="form-inline mb-4">
+                    {% csrf_token %}
+                    {{ edit_form.as_p }}
+                    <button type="button" class="btn btn-primary w-100" onclick="confirmSave()">Guardar</button>
+                </form>
             </div>
         </div>
-        <footer class="footer fixed-bottom bg-dark text-white py-2">
-            <div class="container text-center">
-                <span>🚗✞Concesionarios Salesianos✞🚗 | Todos los derechos reservados © 2024</span>
-            </div>
-        </footer>
-        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-    </body>
-    </html>
+    </div>
+    <footer class="footer fixed-bottom bg-dark text-white py-2">
+        <div class="container text-center">
+            <span>🚗✞Concesionarios Salesianos✞🚗 | Todos los derechos reservados © 2024</span>
+        </div>
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script>
+        function confirmSave() {
+            if (confirm('¿Está seguro de que desea guardar los cambios?')) {
+                document.getElementById('editForm').submit();
+            }
+        }
+    </script>
+</body>
+</html>

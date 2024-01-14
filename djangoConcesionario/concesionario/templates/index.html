@@ -36,7 +36,7 @@
                 <form action="/buscarPorNombre" method="POST" class="form-inline mb-4">
                     {% csrf_token %}
                     <div class="input-group w-100">
-                        <input type="text" class="form-control" id="busqueda" name="busqueda" placeholder="Busque por cualquier caracterísitica del vehículo...">
+                        <input type="text" class="form-control" id="busqueda" name="busqueda" placeholder="Busque por cualquier característica del vehículo...">
                         <div class="input-group-append">
                             <button type="submit" class="btn btn-primary">Buscar</button>
                         </div>
@@ -64,20 +64,14 @@
                                         <td>{{ vehiculo.idmodelo.nombre_modelo }}</td>
                                         <td>{{ vehiculo.idmodelo.tipo_motor }}</td>
                                         <td class="text-center">
-                                            <button type="button" class="btn btn-primary ml-2 btn-sm" onclick="location.href='/editar_vehiculo/{{ vehiculo.idVehiculo }}'"><i class="fas fa-pencil-alt"></i></button>
-                                            <button type="submit" class="btn btn-danger ml-2 btn-sm"><i class="fas fa-trash-alt"></i></button>
+                                            <button type="button" class="btn btn-primary ml-2 btn-sm" onclick="location.href='/editar_vehiculo/{{ vehiculo.idVehiculo }}'">
+                                                <i class="fas fa-pencil-alt"></i>
+                                            </button>
+                                            <button type="button" class="btn btn-danger ml-2 btn-sm btn-eliminar" data-url="/eliminar_vehiculo/{{ vehiculo.idVehiculo }}">
+                                                <i class="fas fa-trash-alt"></i>
+                                            </button>
                                         </td>
                                     </form>
-                                    <!-- <tr class="table-expandable" data-toggle="collapse" data-target="#row{{ vehiculo.idVehiculo }}">
-                                        <td>{{ vehiculo.idVehiculo }}</td>
-                                        <td>{{ vehiculo.idmarca.nombre }}</td>
-                                        <td>{{ vehiculo.idmodelo.nombre_modelo }}</td>
-                                        <td>{{ vehiculo.idmodelo.tipo_motor }}</td>
-                                        <td class="text-center">
-                                            <button type="button" class="btn btn-info btn-sm">&#10034;</button>
-                                            <button type="button" class="btn btn-danger ml-2 btn-sm">&#10006;</button>
-                                        </td>
-                                    </tr> -->
                                     <tr id="row{{ vehiculo.idVehiculo }}" class="collapse">
                                         <td colspan="5">
                                             <table class="table table-striped nested-table">
@@ -100,6 +94,7 @@
                                             </table>
                                         </td>
                                     </tr>
+                                </tr>
                                 {% endfor %}
                             </tbody>
                         </table>
@@ -116,22 +111,18 @@
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             document.querySelectorAll('.btn-eliminar').forEach(function(button) {
                 button.addEventListener('click', function(e) {
                     e.preventDefault();
-                    var form = document.querySelector("#formEliminar");
+                    var url = button.getAttribute('data-url');
                     if (confirm('¿Está seguro de que desea eliminar el vehículo?')) {
-                        form.submit(); // Enviar el formulario
+                        window.location.href = url;
                     }
                 });
             });
         });
     </script>
-    
-    
-
 </body>
 </html>
