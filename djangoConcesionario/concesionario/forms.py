@@ -2,12 +2,14 @@ from django import forms
 from .models import Marca, Modelo, Vehiculo
 from django.core.validators import MinValueValidator
 
+# Este es el formulario para añadir vehiculos a la base de datos como podemos ver
+# se controla mediante el validators que el precio se superior a 0, los demas datos
+# menos el color estaran hardcodeados mediante dropdowns en el template.
 class CrearVehiculoForm(forms.ModelForm):
     precio = forms.FloatField(
         validators=[MinValueValidator(1, message='El precio debe ser mayor que 0')],
         widget=forms.NumberInput(attrs={'class': 'form-control'}),
     )
-
     class Meta:
         model = Vehiculo
         fields = ['idmarca', 'idmodelo', 'color', 'precio']
@@ -24,6 +26,9 @@ class CrearVehiculoForm(forms.ModelForm):
             'precio': forms.NumberInput(attrs={'class': 'form-control'}),
         }
         
+# Este es el formulario de la edicion de vehiculos como se puede ver no se permiten 
+# modificar todos los campos el idmarca y idmodelo no se pueden modificat solo colo
+#y precio.
 class EditarVehiculoForm(forms.ModelForm):
     precio = forms.FloatField(
         validators=[MinValueValidator(1, message='El precio debe ser mayor que 0')],

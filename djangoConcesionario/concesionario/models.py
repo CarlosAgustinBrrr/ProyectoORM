@@ -1,6 +1,7 @@
 from django.db import models
 
-# Create your models here.
+# Aqui creamos nuestros modelos que son los que crean 
+# las tablas de la base de datos.
 
 class Marca(models.Model):
     idMarca = models.AutoField(primary_key=True)
