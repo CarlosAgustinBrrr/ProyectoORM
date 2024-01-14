@@ -36,11 +36,11 @@ def buscar_por_nombre(request):
             Q(precio__icontains=query)
         )
 
-        return render(request, 'index.html', {'vehiculos': vehiculos})
+        return render(request, 'catalogo.html', {'vehiculos': vehiculos})
     else:
         # Si no es un POST, simplemente renderiza la página con todos los vehículos.
         vehiculos = Vehiculo.objects.all()
-        return render(request, 'index.html', {'vehiculos': vehiculos})
+        return render(request, 'catalogo.html', {'vehiculos': vehiculos})
     
 def eliminar_vehiculo(request, idVehiculo):
     vehiculo = Vehiculo.objects.get(idVehiculo=idVehiculo)
