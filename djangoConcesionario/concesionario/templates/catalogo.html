@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Concesionario</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
+</head>
+<body class="bg-secondary">
+    <nav th:fragment="navbar" class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="http://127.0.0.1:8000/">🚗✞Concesionarios Salesianos✞🚗</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav"
+                aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/catalogo">Catálogo de este mes<span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="/crear_vehiculo">Añadir vehículo al catálogo<span class="sr-only">(current)</span></a>
+                </li>
+            </ul>
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="#"><i class="fas fa-sign-in-alt"></i></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#"><i class="fas fa-envelope"></i></a>
+                </li>
+            </ul>
+        </div>
+    </nav>  
+    
+    <div class="container">
+        <div class="card shadow mt-4">
+            <div class="card-body">
+                <h2 class="mb-4">Catálogo📖</h2>
+                <form action="/buscarPorNombre" method="POST" class="form-inline mb-4">
+                    {% csrf_token %}
+                    <div class="input-group w-100">
+                        <input type="text" class="form-control" id="busqueda" name="busqueda" placeholder="Busque por cualquier característica del vehículo...">
+                        <div class="input-group-append">
+                            <button type="submit" class="btn btn-primary">Buscar</button>
+                        </div>
+                    </div>
+                </form>
+                <div class="card shadow">
+                    <div class="card-body">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>NºBastidor</th>
+                                    <th>Marca</th>
+                                    <th>Modelo</th>
+                                    <th>Tipo</th>
+                                    <th class="text-center">Actualizar/Eliminar</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for vehiculo in vehiculos %}
+                                <tr class="table-expandable" data-toggle="collapse" data-target="#row{{ vehiculo.idVehiculo }}">
+                                    <form action="/eliminar_vehiculo/{{ vehiculo.idVehiculo }}" id="formEliminar{{ vehiculo.idVehiculo }}" method="POST">
+                                        {% csrf_token %}
+                                        <td>{{ vehiculo.idVehiculo }}</td>
+                                        <td>{{ vehiculo.idmarca.nombre }}</td>
+                                        <td>{{ vehiculo.idmodelo.nombre_modelo }}</td>
+                                        <td>{{ vehiculo.idmodelo.tipo_motor }}</td>
+                                        <td class="text-center">
+                                            <button type="button" class="btn btn-primary ml-2 btn-sm" onclick="location.href='/editar_vehiculo/{{ vehiculo.idVehiculo }}'">
+                                                <i class="fas fa-pencil-alt"></i>
+                                            </button>
+                                            <button type="button" class="btn btn-danger ml-2 btn-sm btn-eliminar" data-url="/eliminar_vehiculo/{{ vehiculo.idVehiculo }}">
+                                                <i class="fas fa-trash-alt"></i>
+                                            </button>
+                                        </td>
+                                    </form>
+                                    <tr id="row{{ vehiculo.idVehiculo }}" class="collapse">
+                                        <td colspan="5">
+                                            <table class="table table-striped nested-table">
+                                                <thead>
+                                                    <tr>
+                                                        <th>NºPuertas</th>
+                                                        <th>Motor</th>
+                                                        <th>Color</th>
+                                                        <th>Precio</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>{{ vehiculo.idmodelo.numero_puertas }}</td>
+                                                        <td>{{ vehiculo.idmodelo.tipo_motor }}</td>
+                                                        <td>{{ vehiculo.color }}</td>
+                                                        <td>{{ vehiculo.precio }}</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="footer bg-dark fixed-bottom text-white py-2">
+        <div class="container text-center">
+            <span>🚗✞Concesionarios Salesianos✞🚗 | Todos los derechos reservados © 2024</span>
+        </div>
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            document.querySelectorAll('.btn-eliminar').forEach(function(button) {
+                button.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    var url = button.getAttribute('data-url');
+                    if (confirm('¿Está seguro de que desea eliminar el vehículo?')) {
+                        window.location.href = url;
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

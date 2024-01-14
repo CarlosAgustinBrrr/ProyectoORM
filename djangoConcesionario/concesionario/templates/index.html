@@ -1,21 +1,30 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <title>Concesionario</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
 </head>
-<body class="bg-secondary">
+
+<body class="bg-secondary"
+    style="background-image: url('/static/fondo.jpeg'); background-size: 60% 150%; background-repeat: no-repeat; background-position: center top; height: 100vh; margin: 0; position: relative;">
+
     <nav th:fragment="navbar" class="navbar navbar-expand-lg navbar-dark bg-dark">
         <a class="navbar-brand" href="http://127.0.0.1:8000/">🚗✞Concesionarios Salesianos✞🚗</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav"
-                aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="/crear_vehiculo">Añadir vehículo al catálogo<span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="http://127.0.0.1:8000/">Catálogo de este mes<span
+                            class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="/crear_vehiculo">Añadir vehículo al catálogo<span
+                            class="sr-only">(current)</span></a>
                 </li>
             </ul>
             <ul class="navbar-nav">
@@ -28,101 +37,62 @@
             </ul>
         </div>
     </nav>
-    
-    <div class="container">
-        <div class="card shadow mt-4">
-            <div class="card-body">
-                <h2 class="mb-4">Catálogo📖</h2>
-                <form action="/buscarPorNombre" method="POST" class="form-inline mb-4">
-                    {% csrf_token %}
-                    <div class="input-group w-100">
-                        <input type="text" class="form-control" id="busqueda" name="busqueda" placeholder="Busque por cualquier característica del vehículo...">
-                        <div class="input-group-append">
-                            <button type="submit" class="btn btn-primary">Buscar</button>
-                        </div>
-                    </div>
-                </form>
-                <div class="card shadow">
-                    <div class="card-body">
-                        <table class="table table-striped">
-                            <thead>
-                                <tr>
-                                    <th>NºBastidor</th>
-                                    <th>Marca</th>
-                                    <th>Modelo</th>
-                                    <th>Tipo</th>
-                                    <th class="text-center">Actualizar/Eliminar</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {% for vehiculo in vehiculos %}
-                                <tr class="table-expandable" data-toggle="collapse" data-target="#row{{ vehiculo.idVehiculo }}">
-                                    <form action="/eliminar_vehiculo/{{ vehiculo.idVehiculo }}" id="formEliminar{{ vehiculo.idVehiculo }}" method="POST">
-                                        {% csrf_token %}
-                                        <td>{{ vehiculo.idVehiculo }}</td>
-                                        <td>{{ vehiculo.idmarca.nombre }}</td>
-                                        <td>{{ vehiculo.idmodelo.nombre_modelo }}</td>
-                                        <td>{{ vehiculo.idmodelo.tipo_motor }}</td>
-                                        <td class="text-center">
-                                            <button type="button" class="btn btn-primary ml-2 btn-sm" onclick="location.href='/editar_vehiculo/{{ vehiculo.idVehiculo }}'">
-                                                <i class="fas fa-pencil-alt"></i>
-                                            </button>
-                                            <button type="button" class="btn btn-danger ml-2 btn-sm btn-eliminar" data-url="/eliminar_vehiculo/{{ vehiculo.idVehiculo }}">
-                                                <i class="fas fa-trash-alt"></i>
-                                            </button>
-                                        </td>
-                                    </form>
-                                    <tr id="row{{ vehiculo.idVehiculo }}" class="collapse">
-                                        <td colspan="5">
-                                            <table class="table table-striped nested-table">
-                                                <thead>
-                                                    <tr>
-                                                        <th>NºPuertas</th>
-                                                        <th>Motor</th>
-                                                        <th>Color</th>
-                                                        <th>Precio</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr>
-                                                        <td>{{ vehiculo.idmodelo.numero_puertas }}</td>
-                                                        <td>{{ vehiculo.idmodelo.tipo_motor }}</td>
-                                                        <td>{{ vehiculo.color }}</td>
-                                                        <td>{{ vehiculo.precio }}</td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </td>
-                                    </tr>
-                                </tr>
-                                {% endfor %}
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
+
+    <div class="container-fluid d-flex align-items-center justify-content-center" style="height: 90vh; position: relative;">
+
+        <!-- Margen izquierdo con cards -->
+        <div class="card text-white bg-dark" style="max-width: 200px; position: absolute; top: 5%; left: 2%; margin-bottom: 20px;">
+            <div class="card-body text-center">
+                <h5 class="card-title" style="font-size: 1.2rem;">Opiniones</h5>
+                <p class="card-text" style="font-size: 0.9rem;">"La mejor atención y variedad de vehículos."</p>
             </div>
         </div>
-    </div>
-    <footer class="footer bg-dark text-white mt-4 py-2">
-        <div class="container text-center">
-            <span>🚗✞Concesionarios Salesianos✞🚗 | Todos los derechos reservados © 2024</span>
+
+        <div class="card text-white bg-dark" style="max-width: 200px; position: absolute; top: 35%; left: 2%; margin-bottom: 20px;">
+            <div class="card-body text-center">
+                <h5 class="card-title" style="font-size: 1.2rem;">Premios</h5>
+                <p class="card-text" style="font-size: 0.9rem;">"Ganadores del premio a la excelencia en el servicio."</p>
+            </div>
         </div>
-    </footer>
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            document.querySelectorAll('.btn-eliminar').forEach(function(button) {
-                button.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    var url = button.getAttribute('data-url');
-                    if (confirm('¿Está seguro de que desea eliminar el vehículo?')) {
-                        window.location.href = url;
-                    }
-                });
-            });
-        });
-    </script>
-</body>
+
+        <div class="card text-white bg-dark" style="max-width: 200px; position: absolute; top: 65%; left: 2%; margin-bottom: 20px;">
+            <div class="card-body text-center">
+                <h5 class="card-title" style="font-size: 1.2rem;">Ofertas</h5>
+                <p class="card-text" style="font-size: 0.9rem;">"Descuentos exclusivos en modelos destacados."</p>
+            </div>
+        </div>
+
+        <!-- Margen derecho con cards -->
+        <div class="card text-white bg-dark" style="max-width: 200px; position: absolute; top: 5%; right: 2%; margin-bottom: 20px;">
+            <div class="card-body text-center">
+                <h5 class="card-title" style="font-size: 1.2rem;">Reconocimientos</h5>
+                <p class="card-text" style="font-size: 0.9rem;">"Reconocidos por nuestro compromiso con la calidad y servicio excepcional."</p>
+            </div>
+        </div>
+
+        <div class="card text-white bg-dark" style="max-width: 200px; position: absolute; top: 35%; right: 2%; margin-bottom: 20px;">
+            <div class="card-body text-center">
+                <h5 class="card-title" style="font-size: 1.2rem;">Servicio al Cliente</h5>
+                <p class="card-text" style="font-size: 0.9rem;">"Atención personalizada y soluciones rápidas para satisfacer tus necesidades."</p>
+            </div>
+        </div>
+
+        <div class="card text-white bg-dark" style="max-width: 200px; position: absolute; top: 65%; right: 2%; margin-bottom: 20px;">
+            <div class="card-body text-center">
+                <h5 class="card-title" style="font-size: 1.2rem;">Descuentos</h5>
+                <p class="card-text" style="font-size: 0.9rem;">"Descuentos especiales en modelos destacados, ¡no te los pierdas!"</p>
+            </div>
+        </div>
+
+        <footer class="footer bg-dark text-white fixed-bottom py-2">
+            <div class="container text-center">
+                <span>🚗✞Concesionarios Salesianos✞🚗 | Todos los derechos reservados © 2024</span>
+            </div>
+        </footer>
+
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    </body>
+
 </html>

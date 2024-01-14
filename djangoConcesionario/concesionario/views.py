@@ -9,7 +9,7 @@ def consultar_vehiculos(request):
     for vehiculo in vehiculos:
         print(f"ID: {vehiculo.idVehiculo}, Color: {vehiculo.color}, Marca: {vehiculo.idmarca.nombre}, Modelo: {vehiculo.idmodelo.nombre_modelo}, Puertas: {vehiculo.idmodelo.numero_puertas}, Motor: {vehiculo.idmodelo.tipo_motor}, Precio: {vehiculo.precio}")
 
-    return render(request, 'index.html', {'vehiculos': vehiculos})
+    return render(request, 'catalogo.html', {'vehiculos': vehiculos})
 
 def crear_vehiculo(request):
     if request.method == 'POST':
